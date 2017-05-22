@@ -27,7 +27,7 @@ def pack_file(filename, o):
 def pack_object(f, o):
     
     if isinstance(o, int): f.write(pack('<Bi', PyMarkInt, o))
-    elif isinstance(o, long): f.write(pack('<Bq', PyMarkLong, o))
+    elif isinstance(o, int): f.write(pack('<Bq', PyMarkLong, o))
     elif isinstance(o, float): f.write(pack('<Bf', PyMarkFloat, o))
     elif o is None: f.write(pack('<B' , PyMarkNone))
     elif o is True: f.write(pack('<B?', PyMarkBool, True))
@@ -44,7 +44,7 @@ def pack_object(f, o):
         for x in o: pack_object(f, x)
     elif isinstance(o, dict):
         f.write(pack('<Bq', PyMarkDict, len(o)))
-        for x in o.items(): pack_object(f, x)
+        for x in list(o.items()): pack_object(f, x)
     else:
         f.write(pack('<B' , PyMarkNone))
     

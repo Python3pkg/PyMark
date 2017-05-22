@@ -5,7 +5,7 @@ import sys
 import imp
 import argparse
 
-import pymark.packer
+from . import pymark.packer
 
 parser = argparse.ArgumentParser(description='Create PyMark binaries')
 parser.add_argument('input', metavar='<input.py>', nargs=1, help='Input Python file')
